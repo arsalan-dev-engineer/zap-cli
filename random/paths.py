@@ -3,20 +3,20 @@ import os
 import inspect
 
 
-def get_path():
+def find_paths():
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     parentdir = os.path.dirname(currentdir)
     sys.path.insert(0, parentdir)
-    create_file(currentdir)
+    print("Current path: ", currentdir)
+    print("Parent path: ", parentdir)
+    text_file(currentdir)
     
     
-def create_file(current_dir):
-    print("current dir: ", current_dir)
-    with open(f"{current_dir}/temp_file.txt", "a") as f:
-        f.write("Hello\n")
+def text_file(currentdir):
+    with open(f"{currentdir}/text_file.txt", "a") as f:
+        f.write("Hello, this is a text document\n")
         f.close()
-        
-        print("write complete.")
-        
-        
-get_path()
+
+
+if __name__ == "__main__":
+    find_paths()
