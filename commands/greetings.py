@@ -1,6 +1,12 @@
 import click
 
-@click.command()
+@click.group()
+def greetings():
+    """A group of greeting commands."""
+    pass
+
+
+@greetings.command(name='hello')
 @click.option("--count", default=1, help="Number of greetings.")
 @click.option("--name", prompt="Your name", help="The person to greet.")
 def hello(count, name):

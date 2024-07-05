@@ -1,13 +1,12 @@
+# commands/todo.py
 import click
 
-# Define the main click group, which serves as the entry point for the CLI application.
 @click.group()
-def cli():
+def todo():
     """A simple to-do list manager."""
     pass
 
-# Define a command to add a task to the to-do list.
-@cli.command()
+@todo.command()
 @click.argument('task')
 def add(task):
     """
@@ -20,8 +19,7 @@ def add(task):
         f.write(f"{task}\n")
     click.echo(f"Task '{task}' added to the to-do list.")
 
-# Define a command to list all tasks in the to-do list.
-@cli.command(name='list')
+@todo.command(name='list')
 def list_tasks():
     """
     List all tasks in the to-do list.
@@ -38,8 +36,7 @@ def list_tasks():
     except FileNotFoundError:
         click.echo("The to-do list is empty.")
 
-# Define a command to remove a task from the to-do list by its number.
-@cli.command()
+@todo.command()
 @click.argument('task_number', type=int)
 def remove(task_number):
     """
@@ -61,8 +58,7 @@ def remove(task_number):
     except FileNotFoundError:
         click.echo("The to-do list is empty.")
 
-# Define a command to clear all tasks from the to-do list.
-@cli.command()
+@todo.command()
 def clear():
     """
     Clear all tasks from the to-do list.
@@ -70,7 +66,3 @@ def clear():
     with open('todo.txt', 'w'):
         pass
     click.echo("All tasks have been cleared from the to-do list.")
-
-# This ensures the script runs only if it's executed directly, not when imported as a module.
-if __name__ == '__main__':
-    cli()
