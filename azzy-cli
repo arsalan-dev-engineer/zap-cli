@@ -2,13 +2,12 @@
 import sys
 import click
 # Import specific command groups
-from commands import todo, greetings
+from commands import todo, greetings, joke
 
 
 @click.group(help="Azzy's CLI tool")
 def cli():
     """Main entry point for Azzy's CLI Tool."""
-    print("\nPYTHON VERSION: ", sys.version, "\n")
     pass
     
 
@@ -18,6 +17,7 @@ def cli():
 # Add the `todo` command group
 cli.add_command(todo.todo)
 cli.add_command(greetings.greetings)
+cli.add_command(joke.joke)
 
 if __name__ == "__main__":
     cli()
