@@ -2,7 +2,7 @@
 import sys
 import click
 # Import specific command groups
-from commands import todo, greetings, joke
+from commands import todo, greetings, joke, youtube
 
 
 @click.group(help="Azzy's CLI tool")
@@ -15,9 +15,10 @@ def cli():
 # left side = command groups, right side = cli groups
 
 # Add the `todo` command group
-cli.add_command(todo.todo)
-cli.add_command(greetings.greetings)
-cli.add_command(joke.joke)
+cli.add_command(todo.todo, name="todo")
+cli.add_command(greetings.greetings, name="greetings")
+cli.add_command(joke.joke, name="joke")
+cli.add_command(youtube.youtube, name="youtube")
 
 if __name__ == "__main__":
     cli()
