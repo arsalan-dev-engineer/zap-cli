@@ -1,20 +1,11 @@
 import os
 import click
-import sys
-import inspect
 from pytube import YouTube
 
 def find_paths():
-    currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-    parentdir = os.path.dirname(currentdir)
-    sys.path.insert(0, parentdir)
-    print("Current path: ", currentdir)
-    print("Parent path: ", parentdir)
+    parentdir = os.path.dirname(os.path.abspath(__file__))
     save_path = os.path.join(parentdir, "random/youtube_videos")
-
-    # Ensure the SAVE_PATH directory exists
     os.makedirs(save_path, exist_ok=True)
-
     return save_path
 
 SAVE_PATH = find_paths()
@@ -25,7 +16,7 @@ def youtube():
     pass
 
 @click.command()
-@click.argument("-u")
+@click.argument("url")
 def download_video(url):
     """Function to download video from YouTube"""
     try:
@@ -48,6 +39,3 @@ def download_video(url):
         print(f"Errors: {e}")
 
 youtube.add_command(download_video)
-
-if __name__ == "__main__":
-    youtube()

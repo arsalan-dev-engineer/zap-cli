@@ -1,1 +1,63 @@
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
 __pycache__/
+*.so
+
+# C extensions
+*.c
+*.cpp
+*.h
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+*.dist-info/
+*.wheel/
+*.build/
+*.pydevproject
+
+# Virtual environment
+venv/
+.env/
+.venv/
+ENV/
+env/
+# If you use pipenv:
+Pipfile.lock
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# macOS Finder
+.DS_Store
+
+# Windows System files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+*.log.*
+
+# JSON data
+json/
+# You can exclude specific files if you are sure you do not want to ignore all JSON data:
+# !json/*.json
+
+# misc folders
+misc/
+
+# Python environment management
+*.virtualenv/
+*.env
+Pipfile
+Pipfile.lock
