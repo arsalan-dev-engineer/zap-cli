@@ -56,6 +56,9 @@ json/
 # misc folders
 misc/
 
+# random folder
+random/
+
 # Python environment management
 *.virtualenv/
 *.env

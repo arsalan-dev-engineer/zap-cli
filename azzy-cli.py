@@ -4,12 +4,11 @@
 import click
 
 # import modules from commands directory
-from commands import todo
+from commands import calculator
 from commands import greetings
 from commands import joke
+from commands import note_app
 from commands import youtube
-from commands import test
-from commands import calculator
 
 
 # define main command group for the CLI Tool
@@ -30,12 +29,12 @@ The first part is the module and the second part specifies the command to be add
 # example
 # adding the 'calculator' command group to the CLI
 # `calculator.calculator` refers to the `calculator` module's `calculator` command group
-cli.add_command(calculator.calculator, name="calculator")
-cli.add_command(todo.todo, name='todo')
+cli.add_command(calculator.calculator)
 cli.add_command(greetings.greetings)
-cli.add_command(joke.joke, name='joke')
-cli.add_command(youtube.youtube, name='youtube')
-cli.add_command(test.test, name='test')
+cli.add_command(joke.joke)
+cli.add_command(note_app.note_app)
+cli.add_command(youtube.youtube)
+
 
 
 # Entry point of the script.
