@@ -8,7 +8,7 @@ from commands import calculator
 from commands import greetings
 from commands import joke
 from commands import note_app
-from commands import youtube
+from commands import yt_dl
 
 
 # define main command group for the CLI Tool
@@ -33,7 +33,7 @@ cli.add_command(calculator.calculator)
 cli.add_command(greetings.greetings)
 cli.add_command(joke.joke)
 cli.add_command(note_app.note_app)
-cli.add_command(youtube.youtube)
+cli.add_command(yt_dl.yt_dl)
 
 
 

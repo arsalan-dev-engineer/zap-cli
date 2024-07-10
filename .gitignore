@@ -57,7 +57,7 @@ json/
 misc/
 
 # random folder
-random/
+scripts/
 
 # Python environment management
 *.virtualenv/
