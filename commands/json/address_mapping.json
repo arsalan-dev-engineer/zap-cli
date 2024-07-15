@@ -1,0 +1,8 @@
+{
+    "https://chat.openai.com/":"openai",
+    "https://github.com/":"github",
+    "https://www.youtube.com/":"youtube",
+    "https://www.cargiant.co.uk/":"cargiant",
+    "https://www.w3resource.com/":"w3resource",
+    "https://stackoverflow.com/":"stackoverflow"
+}

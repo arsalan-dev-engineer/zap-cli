@@ -9,6 +9,7 @@ from commands import greetings
 from commands import joke
 from commands import note_app
 from commands import yt_dl
+from commands import cache
 
 
 # define main command group for the CLI Tool
@@ -34,6 +35,7 @@ cli.add_command(greetings.greetings)
 cli.add_command(joke.joke)
 cli.add_command(note_app.note_app)
 cli.add_command(yt_dl.yt_dl)
+cli.add_command(cache.cache)
 
 
 
