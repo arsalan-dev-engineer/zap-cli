@@ -1,5 +1,7 @@
 import click
-
+import keyring
+import os
+import json
 
 """
 SCRIPT NOT YET COMPLETE
@@ -18,31 +20,36 @@ def view_credential():
     pass
 
 
-@click.command(name="add", help="add credential")
-def add_credential():
-    """"""
-    click.echo("adding credentials.")
+def load_cache():
+
+
+
+
+@click.command()
+@click.option("--username", prompt="username", help="username for your account.")
+@click.option("--password", prompt="password", confirmation_prompt=True, help="password for your account.")
+def store_credential(username, password):
+    """stores the provided username and password securely."""
+    keyring.set_password("my_service", username, password)
+    click.echo(f"Credentials for {username} has been stored securely.")
     pass
 
 
-@click.command(name="update", help="update credential")
-def update_credential():
-    """"""
-    click.echo("updating credentials.")
-    pass
+@click.command()
+@click.option("--username", prompt="username", help="username for your account.")
+def view_credential(username):
+    """Retrieves the stored password for the given username."""
+    password = keyring.get_password("my_service", username)
+    if password:
+        click.echo(f'The password for {username} is {password}')
+    else:
+        click.echo(f'No credentials found for {username}')
 
 
-@click.command(name="delete", help="delete credential")
-def delete_credential():
-    """"""
-    click.echo("deleting credentials.")
-    pass
 
-
+cache.add_command(store_credential)
 cache.add_command(view_credential)
-cache.add_command(add_credential)
-cache.add_command(update_credential)
-cache.add_command(delete_credential)
+
 
 if __name__ == "__main__":
     cache()

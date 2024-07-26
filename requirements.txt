@@ -1,3 +1,5 @@
 click
 pytube
 requests
+keyring
+yt_dlp
