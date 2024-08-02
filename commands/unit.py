@@ -74,7 +74,6 @@ def convert(amount, from_unit, to_unit):
         click.echo("Error: Unsupported unit type.")
 
 
-
 # add the sub-commands to the unit group
 unit.add_command(convert)
 

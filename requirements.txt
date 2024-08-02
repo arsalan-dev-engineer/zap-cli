@@ -1,5 +1,15 @@
+"""
+This file lists all the dependencies required for the project.
+Option1: Run: 'pip install -r requirements.txt' to install all dependencies mentioned in this file.
+Option2 cd into 'scripting-tools' dir then run: './setup.sh' to install all dependencies.
+"""
+
 click
 pytube
 requests
 keyring
 yt_dlp
+fastapi
+pydantic
+typing
+uvicorn
