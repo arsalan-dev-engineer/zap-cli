@@ -21,8 +21,7 @@ def view_credential():
 
 
 def load_cache():
-
-
+    pass
 
 
 @click.command()

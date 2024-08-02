@@ -11,6 +11,7 @@ from commands import note_app
 from commands import yt_dl
 from commands import cache
 from commands import pass_gen
+from commands import unit
 
 # define main command group for the CLI Tool
 @click.group(help="Azzy's CLI tool:A command-line interface for various utilities.")
@@ -37,6 +38,7 @@ cli.add_command(note_app.note_app)
 cli.add_command(yt_dl.yt_dl)
 cli.add_command(cache.cache)
 cli.add_command(pass_gen.pass_gen)
+cli.add_command(unit.unit)
 
 
 
