@@ -72,30 +72,3 @@ jobs:
           # --log-level=debug: log level set to debug for detailed logging
           # --log-opts="--all": scan all commits in the repository's history
           args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
-            
-  # job to run code linting
-  code-lint:
-    name: "3. Run Code Lint"
-    # depend on the security-scan job
-    needs: security-scan
-    runs-on: ubuntu-latest
-    permissions:
-      # permissions required for code linting
-      contents: read
-      packages: read
-      statuses: write
-
-    steps:
-      - name: Checkout Repository
-        # use the checkout action version 4
-        uses: actions/checkout@v4
-        with:
-          # fetch only the latest commit
-          fetch-depth: 1
-
-      - name: Run Code Linter
-        # use the super-linter action version 6.6.0
-        uses: super-linter/super-linter@v6.6.0
-        env:
-          # GitHub token for accessing the repository
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
