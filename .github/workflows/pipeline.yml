@@ -1,12 +1,12 @@
-# Workflow name
+# workflow name
 name: CLI Pipeline
 
-# Define when the workflow should be triggered
+# define when the workflow should be triggered
 on:
-  # Trigger the workflow on any push to any branch
+  # trigger the workflow on any push to any branch
   push:
     branches: ["*"]
-  # Trigger the workflow on pull requests with specific events
+  # trigger the workflow on pull requests with specific events
   pull_request:
     branches: ["*"]
     types:
@@ -15,51 +15,61 @@ on:
       - reopened
       - synchronize
 
-# Permissions required for the workflow
+# permissions required for the workflow
 permissions:
-  # Read access to the repository contents
+  # read access to the repository contents
   contents: read
-  # Read access to packages
+  # read access to packages
   packages: read
 
-# Define jobs to be run
+# define jobs to be run
 jobs:
-  # Job to checkout the repository and set up the environment
+  # checkout the repository and set up the environment
   checkout-and-setup:
-    # Name of the job
+    # name of the job
     name: "1. Checkout and Setup"
-    # Use the latest Ubuntu runner
+    # use the latest Ubuntu runner
     runs-on: ubuntu-latest
 
     steps:
-      # Step to checkout the repository
+      # step to checkout the repository
       - name: Checkout Repository
-      # Use the checkout action version 4
+      # use the checkout action version 4
         uses: actions/checkout@v4
         with:
-          # Fetch all history for all branches and tags
+          # fetch all history for all branches and tags
           fetch-depth: 0
 
-  # Job to run security scan using gitleaks
+  # job to run security scan using gitleaks
   security-scan:
     name: "2. Run Security Scan"
-    # Depend on the checkout-and-setup job
+    # depend on the checkout-and-setup job
     needs: checkout-and-setup
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
-        # Use the checkout action version 4
+        # use the checkout action version 4
         uses: actions/checkout@v4
         with:
-          # Fetch all history for all branches and tags
+          # fetch all history for all branches and tags
           fetch-depth: 0
 
-        # Step to run gitleaks security scanner
+        # step to run gitleaks security scanner
       - name: Run Security Scanner
-        # Use the gitleaks action version 2
+        # use the gitleaks action version 2
         uses: gitleaks/gitleaks-action@v2
         env:
-          # GitHub token for accessing the repository
+          # gitHub token for accessing the repository
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-
+        with:
+            # custom arguments for gitleaks
+            # --redact: hide secrets in the output
+            # -v: verbose mode
+            # --exit-code=2: exit code 2 if leaks are found
+            # --report-format=sarif: output the report in SARIF format
+            # --report-path=results.sarif: path to save the SARIF report
+            # --log-level=debug: log level set to debug for detailed logging
+            # --log-opts="--all": scan all commits in the repository's history
+            args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
+            
