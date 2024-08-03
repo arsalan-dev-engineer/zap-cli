@@ -38,6 +38,8 @@ jobs:
           # fetch all history for all branches and tags
           fetch-depth: 0
 
+  # ===============
+
   # job to run a security scan using gitleaks
   security-scan:
     name: "2. Run Security Scan"
