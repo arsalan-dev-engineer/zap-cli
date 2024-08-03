@@ -73,3 +73,21 @@ jobs:
             # --log-opts="--all": scan all commits in the repository's history
             args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
             
+  code-lint:
+    name: "3. Run Code Lint"
+    needs: security-scan
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        packages: read
+        statuses: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+      - name: Run Code lineter
+        uses: super-linter/super-linter@v6.6.0
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
