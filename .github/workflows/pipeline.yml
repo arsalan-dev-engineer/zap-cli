@@ -2,11 +2,11 @@
 name: CLI Pipeline
 
 # define when the workflow should be triggered
+# this workflow is triggered on any push to any branch
+# and on pull requests with specific events
 on:
-  # trigger the workflow on any push to any branch
   push:
     branches: ["*"]
-  # trigger the workflow on pull requests with specific events
   pull_request:
     branches: ["*"]
     types:
@@ -16,59 +16,68 @@ on:
       - synchronize
 
 # permissions required for the workflow
+# the workflow needs read permissions for repository contents and packages
 permissions:
-  # read access to the repository contents
   contents: read
-  # read access to packages
   packages: read
 
 # define jobs to be run
 jobs:
-  # checkout the repository and set up the environment
+  # job to checkout the repository and set up the environment
   checkout-and-setup:
-    # name of the job
     name: "1. Checkout and Setup"
-    # use the latest Ubuntu runner
     runs-on: ubuntu-latest
-
+    outputs:
+      # output of the checkout step
+      checkout-dir: ${{ steps.checkout.outputs.dir }}
     steps:
-      # step to checkout the repository
       - name: Checkout Repository
-        # use the checkout action version 4
+        id: checkout
         uses: actions/checkout@v4
         with:
           # fetch all history for all branches and tags
           fetch-depth: 0
 
-  # job to run security scan using gitleaks
+  # job to run a security scan using gitleaks
   security-scan:
     name: "2. Run Security Scan"
-    # depend on the checkout-and-setup job
+    # depends on the completion of the checkout-and-setup job
     needs: checkout-and-setup
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
-        # use the checkout action version 4
         uses: actions/checkout@v4
         with:
           # fetch all history for all branches and tags
           fetch-depth: 0
-
-      # step to run gitleaks security scanner
       - name: Run Security Scanner
-        # use the gitleaks action version 2
         uses: gitleaks/gitleaks-action@v2
         env:
-          # GitHub token for accessing the repository
+          # token for accessing the GitHub API
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # job to generate and upload a changelog
+  generate-changelog:
+    name: "3. Generate Changelog"
+    # depends on the completion of the security-scan job
+    needs: security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          # custom arguments for gitleaks
-          # --redact: hide secrets in the output
-          # -v: verbose mode
-          # --exit-code=2: exit code 2 if leaks are found
-          # --report-format=sarif: output the report in SARIF format
-          # --report-path=results.sarif: path to save the SARIF report
-          # --log-level=debug: log level set to debug for detailed logging
-          # --log-opts="--all": scan all commits in the repository's history
-          args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
+          # fetch all history for all branches and tags
+          fetch-depth: 0
+      - name: Generate Changelog
+        run: |
+          # generate a changelog based on commit history
+          git log --pretty=format:"* %h - %an, %ar : %s" > CHANGELOG.md
+          # output the changelog to the log
+          cat CHANGELOG.md
+      - name: Upload Changelog as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          # name of the artifact
+          name: changelog
+          # path to the file to be uploaded
+          path: CHANGELOG.md
