@@ -55,29 +55,3 @@ jobs:
         env:
           # token for accessing the GitHub API
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # job to generate and upload a changelog
-  generate-changelog:
-    name: "3. Generate Changelog"
-    # depends on the completion of the security-scan job
-    needs: security-scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          # fetch all history for all branches and tags
-          fetch-depth: 0
-      - name: Generate Changelog
-        run: |
-          # generate a changelog based on commit history
-          git log --pretty=format:"* %h - %an, %ar : %s" > CHANGELOG.md
-          # output the changelog to the log
-          cat CHANGELOG.md
-      - name: Upload Changelog as Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          # name of the artifact
-          name: changelog
-          # path to the file to be uploaded
-          path: CHANGELOG.md
