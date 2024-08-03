@@ -1,6 +1,10 @@
 import click
 import requests
 
+"""
+SCRIPT REQUIRES expense_api.py to run with univorn.
+"""
+
 # base url for your fastapi server
 BASE_URL = "http://127.0.0.1:8000"
 
