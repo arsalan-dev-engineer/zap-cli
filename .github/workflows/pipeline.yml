@@ -34,7 +34,7 @@ jobs:
     steps:
       # step to checkout the repository
       - name: Checkout Repository
-      # use the checkout action version 4
+        # use the checkout action version 4
         uses: actions/checkout@v4
         with:
           # fetch all history for all branches and tags
@@ -55,39 +55,47 @@ jobs:
           # fetch all history for all branches and tags
           fetch-depth: 0
 
-        # step to run gitleaks security scanner
+      # step to run gitleaks security scanner
       - name: Run Security Scanner
         # use the gitleaks action version 2
         uses: gitleaks/gitleaks-action@v2
         env:
-          # gitHub token for accessing the repository
+          # GitHub token for accessing the repository
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            # custom arguments for gitleaks
-            # --redact: hide secrets in the output
-            # -v: verbose mode
-            # --exit-code=2: exit code 2 if leaks are found
-            # --report-format=sarif: output the report in SARIF format
-            # --report-path=results.sarif: path to save the SARIF report
-            # --log-level=debug: log level set to debug for detailed logging
-            # --log-opts="--all": scan all commits in the repository's history
-            args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
+          # custom arguments for gitleaks
+          # --redact: hide secrets in the output
+          # -v: verbose mode
+          # --exit-code=2: exit code 2 if leaks are found
+          # --report-format=sarif: output the report in SARIF format
+          # --report-path=results.sarif: path to save the SARIF report
+          # --log-level=debug: log level set to debug for detailed logging
+          # --log-opts="--all": scan all commits in the repository's history
+          args: --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug --log-opts="--all"
             
+  # job to run code linting
   code-lint:
     name: "3. Run Code Lint"
+    # depend on the security-scan job
     needs: security-scan
     runs-on: ubuntu-latest
     permissions:
-        contents: read
-        packages: read
-        statuses: write
+      # permissions required for code linting
+      contents: read
+      packages: read
+      statuses: write
+
     steps:
       - name: Checkout Repository
+        # use the checkout action version 4
         uses: actions/checkout@v4
         with:
-            fetch-depth: 1
-      - name: Run Code lineter
+          # fetch only the latest commit
+          fetch-depth: 1
+
+      - name: Run Code Linter
+        # use the super-linter action version 6.6.0
         uses: super-linter/super-linter@v6.6.0
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          # GitHub token for accessing the repository
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
