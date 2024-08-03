@@ -1,0 +1,27 @@
+---
+name: CLI Pipeline
+
+on:
+    push:
+        branches: ["*"]
+    pull_request: 
+        branches: ["*"]
+        types:
+        - opened
+        - edited
+        - reopened
+        - synchronize
+permissions:
+    contents: read
+    packages: read
+jobs:
+    checkout-and-setup:
+        name: ". Checkout and Setup"
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+                fetch-depth: 0
+            
+
