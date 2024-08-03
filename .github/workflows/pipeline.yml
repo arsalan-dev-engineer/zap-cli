@@ -61,7 +61,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           # gitHub token for accessing the repository
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             # custom arguments for gitleaks
             # --redact: hide secrets in the output
