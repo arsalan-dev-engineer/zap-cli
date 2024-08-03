@@ -1,7 +1,10 @@
 ---
+# workflow name
 name: CLI Pipeline
 
+# when the workflow should be triggered
 on:
+    # trigger workflow on any push to any branch
     push:
         branches: ["*"]
     pull_request: 
@@ -11,17 +14,40 @@ on:
         - edited
         - reopened
         - synchronize
+
+# permissions required for the workflow
 permissions:
+    # read access to repository contents
     contents: read
+    # read access to packages
     packages: read
+
+# define jobs to run
 jobs:
     checkout-and-setup:
-        name: ". Checkout and Setup"
+        name: "1. Checkout and Setup"
+        # use checkout action v4
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+                # fetch all history for all branches/tags
+                fetch-depth: 0
+            
+    security-scan:
+        name: "2. Run Security Scan"
+        needs: checkout-and-setup
         runs-on: ubuntu-latest
         steps:
           - name: Checkout Repository
             uses: actions/checkout@v4
             with:
                 fetch-depth: 0
-            
+          - name: Run Security Scanner
+            uses: gitleaks/gitleaks-action@v2
+            env:
+                GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+                
+
 
