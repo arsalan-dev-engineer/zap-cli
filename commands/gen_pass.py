@@ -1,6 +1,7 @@
 import click
 import secrets
 import string
+from commands import logger
 
 # ====================
 
@@ -28,40 +29,42 @@ def generate_pass(length, include_cap, include_num, include_sp):
     - include_cap (bool): Flag to include uppercase letters in the password.
     - include_num (bool): Flag to include numbers in the password.
     - include_sp (bool): Flag to include special characters in the password.
-
-    Raises:
-    - click.BadParameter: If the password length is less than 8 or no character types are included.
     """
-    
-    # check if the length is less than the minimum required
-    if length < 8:
-        raise click.BadParameter("Password length must be at least 8.")
 
-    # initialize the alphabet with lowercase letters
+    # Check if the length is less than the minimum required
+    if length < 8:
+        logger.error("Password length must be at least 8.")
+        return
+    
+    # Initialise the alphabet with lowercase letters
     alphabet = string.ascii_lowercase
     
-    # include uppercase letters if the flag is set
+    # Include uppercase letters if the flag is set
     if include_cap:
-        alphabet += string.ascii_uppercase  # Append uppercase letters
+        # Append uppercase letters
+        alphabet += string.ascii_uppercase
     
-    # include numbers if the flag is set
+    # Include numbers if the flag is set
     if include_num:
         alphabet += string.digits  # Append digits
     
-    # include special characters if the flag is set
+    # Include special characters if the flag is set
     if include_sp:
         alphabet += string.punctuation  # Append special characters
 
-    # ensure at least one character type is included
+    # Ensure at least one character type is included
     if len(alphabet) == 0:
-        raise click.BadParameter("At least one character type must be included.")
+        logger.error("At least one character type must be included.")
+        return
 
-    # generate the password by selecting random characters from the alphabet
+    # Generate the password by selecting random characters from the alphabet
     password = "".join(secrets.choice(alphabet) for _ in range(length))
     
-    # output the generated password
-    click.echo(f"\nGenerated Password:\n{password}\n")
-
+    # Output the generated password
+    logger.success("Password successfully generated:")
+    # Print the password to the console
+    click.echo(f"{password}")
+    
 # ====================
 
 # Add the generate_pass command to the gen_pass group

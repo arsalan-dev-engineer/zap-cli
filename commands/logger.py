@@ -2,6 +2,14 @@ import time
 from rich.console import Console
 from rich.progress import Progress
 
+"""
+This module provides a set of utility functions for logging messages to 
+the console using the Rich library for enhanced formatting.
+This module also includes functions for showing progress during long-running operations.
+Purpose of this script is to improve user experience and provide clear feedback 
+during script executiions.
+"""
+
 console = Console()
 
 def error(message: str):
