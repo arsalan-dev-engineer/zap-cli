@@ -8,7 +8,7 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 
 - **Calculator**: Perform basic arithmetic operations with ease.
 - **Expense Tracker**: Keep track of your spending and manage your finances.
-- **Password Generator**: Create secure, customizable passwords effortlessly.
+- **Password Generator**: Create secure, customisable passwords effortlessly.
 - **Note App**: Store and retrieve your notes quickly and efficiently.
 - **Unit Conversion**: Convert between various units of measurement seamlessly.
 - **YouTube Downloader**: Download your favorite videos from YouTube with simple commands.
