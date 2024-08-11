@@ -8,7 +8,7 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 
 - **Calculator**: Perform basic arithmetic operations with ease.
 - **Expense Tracker**: Keep track of your spending and manage your finances.
-- **Password Generator**: Create secure, customisable passwords effortlessly.
+- **Password Generator**: Create secure, customizable passwords effortlessly.
 - **Note App**: Store and retrieve your notes quickly and efficiently.
 - **Unit Conversion**: Convert between various units of measurement seamlessly.
 - **YouTube Downloader**: Download your favorite videos from YouTube with simple commands.
@@ -17,22 +17,20 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 
 To get started with Azzy CLI, follow these steps:
 
-**Clone the Repository**:
+**1. Clone the Repository**:
 ```bash
-git clone https://github.com/Azzy001/azzy-cli.git
+git clone https://github.com/yourusername/azzy-cli.git
 ```
-**Navigate to the Project Directory:**
+**2. Navigate to the Project Directory:**
 ```bash
 cd azzy-cli
 ```
-**Set Up a Virtual Environment (optional but recommended):**
+**3. Run the Setup Script:**
 ```bash
-python3 -m venv venv
-# on Windows use `venv\bin\activate`
-source venv/bin/activate
-```
-**Install Dependencies:**
-```bash
-pip install -r requirements.txt
+bash scripting_tools/setup.sh
 ```
 
+## Note
+Ensure you have bash installed on your system to run the script.
+
+The script will automatically create a virtual environment in the correct path and install all dependencies listed in requirements.txt.
