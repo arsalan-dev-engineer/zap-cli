@@ -36,5 +36,3 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Contributing
-Contributions are welcome! If you have suggestions for improvements or want to add new features, please fork the repository and submit a pull request.
