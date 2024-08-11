@@ -5,12 +5,9 @@ import click
 
 # import modules from commands directory
 from commands import calculator
-from commands import greetings
-from commands import joke
 from commands import note_app
 from commands import yt_dl
-from commands import cache
-from commands import pass_gen
+from commands import gen_pass
 from commands import unit
 from commands import expense
 
@@ -33,12 +30,9 @@ The first part is the module and the second part specifies the command to be add
 # adding the 'calculator' command group to the CLI
 # `calculator.calculator` refers to the `calculator` module's `calculator` command group
 cli.add_command(calculator.calculator)
-cli.add_command(greetings.greetings)
-cli.add_command(joke.joke)
 cli.add_command(note_app.note_app)
 cli.add_command(yt_dl.yt_dl)
-cli.add_command(cache.cache)
-cli.add_command(pass_gen.pass_gen)
+cli.add_command(gen_pass.gen_pass)
 cli.add_command(unit.unit)
 cli.add_command(expense.expense)
 
