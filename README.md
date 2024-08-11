@@ -19,7 +19,7 @@ To get started with Azzy CLI, follow these steps:
 
 **Clone the Repository**:
 ```bash
-https://github.com/Azzy001/azzy-cli.git
+git clone https://github.com/Azzy001/azzy-cli.git
 ```
 **Navigate to the Project Directory:**
 ```bash
