@@ -13,3 +13,4 @@ fastapi
 pydantic
 typing
 uvicorn
+rich
