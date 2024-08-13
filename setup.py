@@ -3,24 +3,24 @@ from setuptools import setup, find_packages
 """
 setup.py for azzy-cli
 
-This script is used for packaging and distributing the azzy-cli project.
-It includes configuration details such as the package name, version, dependencies,
-and entry points, making it possible to install the package and use it as a command-line
-tool.
+This script is used to package and distribute the azzy-cli project.
+It includes details like the package name, version, dependencies, 
+and entry points, making it easy to install and use as a command-line tool.
 
-Key functions of this setup.py file:
+Key features of this setup.py file:
 - Defines the package name and version.
-- Lists the required dependencies (e.g., Click library).
+- Lists required dependencies (like the Click library).
 - Specifies the command-line entry point, allowing the 'azzy-cli' command to be used in the terminal.
-- Facilitates installation of the package in development mode (editable mode) using `pip install -e .`.
+- Enables installation in development mode (editable mode) with `pip install -e .`.
 
-By running `python setup.py install` or `pip install -e .`, this script enables users to install 
-the azzy-cli package and makes the azzy-cli command globally available on their system.
+Running `python setup.py install` or `pip install -e .` allows users to install 
+the azzy-cli package and make the azzy-cli command available globally.
 
-This file should be included in your version control (e.g., Git) as it is essential for package
-installation and distribution, but directories like `*.egg-info/` generated during the installation process
+This file should be included in version control (e.g., Git) since it is essential for 
+package installation and distribution, but the generated `*.egg-info/` directories 
 should be excluded from version control.
 """
+
 
 setup(
     # package name
