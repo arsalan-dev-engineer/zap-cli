@@ -3,12 +3,15 @@ import requests
 
 """
 SCRIPT REQUIRES expense_api.py to run with univorn.
+Notes:
+expose_value=False --> option will not show up as an actual option when the user invokes the command.
 """
 
 # base url for your fastapi server
 BASE_URL = "http://127.0.0.1:8000"
 
 @click.group(help="A group of commands for the expense tracker app.")
+@click.option("--warning", is_eager=True, help="WARNING: fastapi/expense_api.py needs to run on uvicorn server before running this script.", expose_value=False)
 def expense():
     """
     command group for managing expenses.
