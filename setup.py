@@ -21,25 +21,17 @@ package installation and distribution, but the generated `*.egg-info/` directori
 should be excluded from version control.
 """
 
-
 setup(
-    # package name
     name='azzy-cli',
-    # package version
     version='0.1',
-    # automatically find and include all packages
     packages=find_packages(),
-    # include other files listed in MANIFEST.in
     include_package_data=True,
     install_requires=[
-        # add any other dependencies your CLI needs
-        'click',  
+        'click',
     ],
     entry_points={
         'console_scripts': [
-            # expose azzy-cli as a command
             'azzy-cli=azzy_cli:cli',
-            # add other cli's here.
         ],
     },
     classifiers=[

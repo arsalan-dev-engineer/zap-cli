@@ -10,6 +10,8 @@ from commands import yt_dl
 from commands import gen_pass
 from commands import unit
 from commands import expense
+from commands import sysinfo
+
 
 # define main command group for the CLI Tool
 @click.group(help="Azzy's CLI tool:A command-line interface for various utilities.")
@@ -35,10 +37,11 @@ cli.add_command(yt_dl.yt_dl)
 cli.add_command(gen_pass.gen_pass)
 cli.add_command(unit.unit)
 cli.add_command(expense.expense)
-
+cli.add_command(sysinfo.sysinfo)
 
 
 # Entry point of the script.
 # Calls the CLI tool if the script is executed.
 if __name__ == "__main__":
     cli()
+
