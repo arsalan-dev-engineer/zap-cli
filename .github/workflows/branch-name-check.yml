@@ -1,0 +1,36 @@
+name: Enforce Branch Naming Convention with Auto-Increment
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+
+jobs:
+  auto_increment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        
+      - name: Increment branch number
+        run: |
+          # Fetch the last used feature number from the file
+          LAST_NUMBER=$(cat last-feature-number.txt || echo 0)
+          NEXT_NUMBER=$((LAST_NUMBER + 1))
+          
+          # Create the branch name based on the incremented number
+          BRANCH_NAME="feature-$NEXT_NUMBER"
+          
+          # Update the last feature number file
+          echo $NEXT_NUMBER > last-feature-number.txt
+          
+          echo "Creating new branch with name: $BRANCH_NAME"
+          
+          # Optionally, create the branch locally and push it
+          git checkout -b $BRANCH_NAME
+          git push origin $BRANCH_NAME
+          
+          # Push the updated last number file
+          git add last-feature-number.txt
+          git commit -m "Update feature number"
+          git push origin main  # Or whatever the default branch is
