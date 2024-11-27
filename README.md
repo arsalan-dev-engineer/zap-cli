@@ -34,3 +34,5 @@ bash scripting_tools/setup.sh
 Make sure you have bash installed on your system to run the script.
 
 The script will automatically create a virtual environment in the correct path and install all dependencies listed in requirements.txt.
+
+## temp 2
