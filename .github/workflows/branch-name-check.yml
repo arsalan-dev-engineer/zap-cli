@@ -3,7 +3,7 @@ name: Enforce Branch Naming Convention with Auto-Increment
 on:
   push:
     branches:
-      - 'feature/*'
+      - 'feature/*'  # Trigger on push to any feature branch (feature/*)
 
 jobs:
   auto_increment:
@@ -12,13 +12,19 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
-      - name: Increment branch number
+      - name: Fetch last feature number and increment
         run: |
-          # Fetch the last used feature number from the file
-          LAST_NUMBER=$(cat last-feature-number.txt || echo 0)
+          # Fetch the last used feature number from the file (if it exists)
+          if [ -f last-feature-number.txt ]; then
+            LAST_NUMBER=$(cat last-feature-number.txt)
+          else
+            LAST_NUMBER=0  # Start from 0 if the file doesn't exist
+          fi
+          
+          # Increment the feature number by 1
           NEXT_NUMBER=$((LAST_NUMBER + 1))
           
-          # Create the branch name based on the incremented number
+          # Create the new branch name based on the incremented number
           BRANCH_NAME="feature-$NEXT_NUMBER"
           
           # Update the last feature number file
@@ -26,11 +32,12 @@ jobs:
           
           echo "Creating new branch with name: $BRANCH_NAME"
           
-          # Optionally, create the branch locally and push it
+          # Create the branch locally and push it to the remote repository
           git checkout -b $BRANCH_NAME
           git push origin $BRANCH_NAME
           
-          # Push the updated last number file
+          # Commit and push the updated last feature number file
           git add last-feature-number.txt
-          git commit -m "Update feature number"
-          git push origin main  # Or whatever the default branch is
+          git commit -m "Update feature number to $NEXT_NUMBER"
+          git push origin main  # Push the updated feature number file to the default branch (main)
+
