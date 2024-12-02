@@ -103,8 +103,10 @@ fi
 
 # Notify the user that the setup process is complete
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
+
+# Dynamically display the path to activate the virtual environment
 echo -e "${GREEN}To activate the virtual environment manually, run:${NC}"
-echo -e "${GREEN}source $VENV_DIR/bin/activate${NC}"
+echo -e "${GREEN}source ${VENV_DIR}/bin/activate${NC}"
 
 # Instruction to run the main zap-cli.py script
 echo -e "${GREEN}You can now run the CLI with:${NC}"
