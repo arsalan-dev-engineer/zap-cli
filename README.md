@@ -1,8 +1,8 @@
-## Azzy CLI
+## ZAP CLI
 
-Welcome to **Azzy CLI**! This command-line interface (CLI) tool is designed to provide a wide range of useful scripts and commands for various tasks. This repository features a collection of tools and utilities, all accessible through an intuitive and extensible CLI interface, making it easy to integrate into your daily workflows.
+Welcome to **Zap CLI**! This command-line interface (CLI) tool is designed to provide a wide range of useful scripts and commands for various tasks. This repository features a collection of tools and utilities, all accessible through an intuitive and extensible CLI interface, making it easy to integrate into your daily workflows.
 
-Whether you need to perform calculations, manage expenses, generate secure passwords, take notes, convert units, or download YouTube videos, Azzy CLI has you covered. With its modular structure, you can easily extend its capabilities to fit your specific needs.
+Whether you need to perform calculations, manage expenses, generate secure passwords, take notes, convert units, or download YouTube videos, ZAP CLI has you covered. With its modular structure, you can easily extend its capabilities to fit your specific needs.
 
 ## Features
 
@@ -15,15 +15,15 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 
 ## Installation
 
-To get started with Azzy CLI, follow these steps:
+To get started with zap cli, follow these steps:
 
 **1. Clone the Repository**:
 ```bash
-git clone https://github.com/yourusername/azzy-cli.git
+git clone https://github.com/yourusername/zap-cli.git
 ```
 **2. Navigate to the Project Directory:**
 ```bash
-cd azzy-cli
+cd zap-cli
 ```
 **3. Run the Setup Script:**
 ```bash

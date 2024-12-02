@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 """
-setup.py for azzy-cli
+setup.py fo dev-cli
 
 This script is used to package and distribute the azzy-cli project.
 It includes details like the package name, version, dependencies, 

@@ -14,9 +14,9 @@ from commands import sysinfo
 from commands import cache
 
 # define main command group for the CLI Tool
-@click.group(help="Azzy's CLI tool:A command-line interface for various utilities.")
+@click.group(help="ZAP CLI tool:A command-line interface for various utilities.")
 def cli():
-    """Main entry point for Azzy's CLI Tool."""
+    """Main entry point for ZAP CLI Tool."""
      # function doesn't do anything.
      # is REQUIRED for defining the command group
     pass
