@@ -9,9 +9,12 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Get the script directory
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+
 # Define the virtual environment directory and requirements file path
-VENV_DIR="../venv"
-REQUIREMENTS_FILE="../requirements.txt"
+VENV_DIR="$SCRIPT_DIR/../venv"
+REQUIREMENTS_FILE="$SCRIPT_DIR/../requirements.txt"
 
 # Check if Python3 is installed
 if ! command -v python3 &> /dev/null; then
@@ -20,11 +23,10 @@ if ! command -v python3 &> /dev/null; then
 fi
 
 # Check if the python3-venv package is installed, and install it if missing
-if ! python3 -m venv --help &> /dev/null; then
-    echo -e "${RED}Error: python3-venv is not installed.${NC}"
+if ! dpkg -s python3-venv &> /dev/null; then
     echo -e "${YELLOW}Installing python3-venv...${NC}"
     sudo apt update
-    sudo apt install -y python3.10-venv  # Adjust version if necessary
+    sudo apt install -y python3-venv
 fi
 
 # Create or recreate the virtual environment
@@ -42,20 +44,14 @@ else
 fi
 
 # Activate the virtual environment
-if [ -f "$VENV_DIR/bin/activate" ]; then
-    echo -e "${YELLOW}Activating the virtual environment...${NC}"
-    source "$VENV_DIR/bin/activate"
-else
-    echo -e "${RED}Error: Failed to activate virtual environment. Check the directory structure.${NC}"
-    exit 1
-fi
+echo -e "${YELLOW}Activating the virtual environment...${NC}"
+source "$VENV_DIR/bin/activate"
 
 # Upgrade pip to the latest version
 echo -e "${YELLOW}Upgrading pip to the latest version...${NC}"
 pip install --upgrade pip
 
 # Check if the requirements.txt file exists
-echo -e "${YELLOW}Checking if requirements.txt exists at $REQUIREMENTS_FILE...${NC}"
 if [ -f "$REQUIREMENTS_FILE" ]; then
     echo -e "${YELLOW}Installing packages from $REQUIREMENTS_FILE...${NC}"
     pip install -r "$REQUIREMENTS_FILE"
@@ -66,8 +62,9 @@ else
 fi
 
 # Create a symlink for the zap-cli command globally
+ZAP_CLI_PATH="$SCRIPT_DIR/../zap-cli/zap_cli.py"
 echo -e "${YELLOW}Creating global symlink for zap-cli...${NC}"
-sudo ln -sf /home/arsalan/repositories/zap-cli/zap_cli.py /usr/local/bin/zap-cli
+sudo ln -sf "$ZAP_CLI_PATH" /usr/local/bin/zap-cli
 
 # Notify the user that the setup process is complete
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
@@ -77,3 +74,6 @@ echo -e "${GREEN}source $VENV_DIR/bin/activate${NC}"
 # Instruction to run the main zap-cli.py script
 echo -e "${GREEN}You can now run the CLI with:${NC}"
 echo -e "${GREEN}zap-cli --help${NC}"
+
+# Deactivate the virtual environment
+deactivate
