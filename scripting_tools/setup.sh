@@ -67,7 +67,7 @@ fi
 
 # Create a symlink for the zap-cli command globally
 echo -e "${YELLOW}Creating global symlink for zap-cli...${NC}"
-sudo ln -sf /home/arsalan/repositories/zap-cli/azzy_cli.py /usr/local/bin/zap-cli
+sudo ln -sf /home/arsalan/repositories/zap-cli/zap_cli.py /usr/local/bin/zap-cli
 
 # Notify the user that the setup process is complete
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
