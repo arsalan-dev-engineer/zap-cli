@@ -64,6 +64,10 @@ else
     exit 1
 fi
 
+# Create a symlink for the azzy-cli command globally
+echo -e "${YELLOW}Creating global symlink for azzy-cli...${NC}"
+sudo ln -sf /home/arsalan/repositories/azzy-cli/azzy_cli.py /usr/local/bin/azzy-cli
+
 # Notify the user that the setup process is complete
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
 echo -e "${GREEN}To activate the virtual environment manually, run:${NC}"
@@ -71,4 +75,4 @@ echo -e "${GREEN}source $VENV_DIR/bin/activate${NC}"
 
 # Instruction to run the main azzy-cli.py script
 echo -e "${GREEN}You can now run the CLI with:${NC}"
-echo -e "${GREEN}python3 ../azzy-cli/azzy_cli.py --help${NC}"
+echo -e "${GREEN}azzy-cli --help${NC}"
