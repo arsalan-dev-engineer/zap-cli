@@ -55,6 +55,7 @@ echo -e "${YELLOW}Upgrading pip to the latest version...${NC}"
 pip install --upgrade pip
 
 # Check if the requirements.txt file exists
+echo -e "${YELLOW}Checking if requirements.txt exists at $REQUIREMENTS_FILE...${NC}"
 if [ -f "$REQUIREMENTS_FILE" ]; then
     echo -e "${YELLOW}Installing packages from $REQUIREMENTS_FILE...${NC}"
     pip install -r "$REQUIREMENTS_FILE"
