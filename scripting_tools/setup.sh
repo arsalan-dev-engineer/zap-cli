@@ -11,10 +11,11 @@ NC='\033[0m' # No Color
 
 # Automatically detect the script's root directory dynamically
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+ROOT_DIR="$(realpath "$SCRIPT_DIR/..")"  # Parent directory of the script
 
 # Define the virtual environment directory and requirements file path, based on the current directory
-VENV_DIR="${SCRIPT_DIR}/venv"
-REQUIREMENTS_FILE="${SCRIPT_DIR}/requirements.txt"
+VENV_DIR="${ROOT_DIR}/venv"
+REQUIREMENTS_FILE="${ROOT_DIR}/requirements.txt"
 
 # Check if Python3 is installed
 if ! command -v python3 &> /dev/null; then
@@ -42,10 +43,10 @@ find_requirements_file() {
     fi
 }
 
-# If the requirements file is not found in the current directory, try searching for it
+# If the requirements file is not found in the current directory, try searching for it in the parent directory
 if [ ! -f "$REQUIREMENTS_FILE" ]; then
-    echo -e "${YELLOW}Requirements file not found in $SCRIPT_DIR. Searching in subdirectories...${NC}"
-    REQUIREMENTS_FILE=$(find_requirements_file "$SCRIPT_DIR")
+    echo -e "${YELLOW}Requirements file not found in $ROOT_DIR. Searching in subdirectories...${NC}"
+    REQUIREMENTS_FILE=$(find_requirements_file "$ROOT_DIR")
     
     if [ -z "$REQUIREMENTS_FILE" ]; then
         echo -e "${RED}Error: requirements.txt not found in the directory structure.${NC}"
@@ -88,14 +89,14 @@ echo -e "${YELLOW}Installing packages from $REQUIREMENTS_FILE...${NC}"
 pip install -r "$REQUIREMENTS_FILE"
 
 # Create a symlink for the zap-cli command globally
-ZAP_CLI_PATH="$SCRIPT_DIR/zap-cli/zap_cli.py"
+ZAP_CLI_PATH="${ROOT_DIR}/zap_cli.py"
 
 # Check if zap-cli.py exists before creating the symlink
 if [ -f "$ZAP_CLI_PATH" ]; then
     echo -e "${YELLOW}Creating global symlink for zap-cli...${NC}"
     sudo ln -sf "$ZAP_CLI_PATH" /usr/local/bin/zap-cli
 else
-    echo -e "${RED}Error: zap-cli.py not found in $SCRIPT_DIR/zap-cli/${NC}"
+    echo -e "${RED}Error: zap-cli.py not found in $ROOT_DIR/${NC}"
     deactivate
     exit 1
 fi
