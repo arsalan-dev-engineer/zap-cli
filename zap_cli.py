@@ -12,6 +12,7 @@ from commands import unit
 from commands import expense
 from commands import sysinfo
 from commands import cache
+from commands import image_processor
 
 # define main command group for the CLI Tool
 @click.group(help="ZAP CLI tool:A command-line interface for various utilities.")
@@ -39,6 +40,7 @@ cli.add_command(unit.unit)
 cli.add_command(expense.expense)
 cli.add_command(sysinfo.sysinfo)
 cli.add_command(cache.cache)
+cli.add_command(image_processor.image_processor)
 
 
 # Entry point of the script.

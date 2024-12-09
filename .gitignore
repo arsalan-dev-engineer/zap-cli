@@ -59,7 +59,6 @@ Desktop.ini
 *.log
 *.log.*
 
-
 # Ignore the 'misc/' directory
 misc/
 
@@ -70,3 +69,8 @@ scripts/
 *.env
 Pipfile
 Pipfile.lock
+
+# Ignore content in resources/images/
+resources/images/*
+# Do no ignore the .ignore file itself
+!resources/images/.gitignore
