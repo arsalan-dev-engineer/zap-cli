@@ -72,5 +72,3 @@ Pipfile.lock
 
 # Ignore content in resources/images/
 resources/images/*
-# Do no ignore the .ignore file itself
-!resources/images/.gitignore
