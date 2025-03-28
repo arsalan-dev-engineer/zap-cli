@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Enhanced Python virtual environment setup script with Zsh installation and setup
+# Enhanced Python virtual environment setup script without Zsh installation and setup
 set -e
 
 # Colors for output
@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 
 # Automatically detect the script's root directory dynamically
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-ROOT_DIR="$(realpath "$SCRIPT_DIR/..")"  # Parent directory of the script
+ROOT_DIR="$HOME"  # Set root directory to user's home directory
 
 # Define the virtual environment directory and requirements file path
 VENV_DIR="${ROOT_DIR}/venv"
@@ -70,29 +70,6 @@ else
     exit 1
 fi
 
-# Install Zsh if it's not installed
-if ! command -v zsh &> /dev/null; then
-    echo -e "${YELLOW}Installing Zsh...${NC}"
-    sudo apt install -y zsh
-fi
-
-# Change the default shell to Zsh
-echo -e "${YELLOW}Setting Zsh as the default shell...${NC}"
-chsh -s "$(which zsh)"
-
-# Ensure .zshrc exists and add zap-cli alias if not already present
-if [ ! -f "~/.zshrc" ]; then
-    echo -e "${YELLOW}Creating default .zshrc configuration file...${NC}"
-    touch ~/.zshrc
-fi
-
-if ! grep -q "alias zap-cli" ~/.zshrc; then
-    echo -e "${YELLOW}Adding alias for zap-cli in .zshrc...${NC}"
-    echo "alias zap-cli='python $ZAP_CLI_PATH'" >> ~/.zshrc
-else
-    echo -e "${GREEN}Alias for zap-cli already exists in .zshrc.${NC}"
-fi
-
 # Final messages
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
 echo -e "${GREEN}To activate the virtual environment manually, run:${NC}"
@@ -103,7 +80,3 @@ echo -e "${GREEN}zap-cli --help${NC}"
 
 # Deactivate the virtual environment
 deactivate
-
-# Instructions for applying changes
-echo -e "${YELLOW}To apply changes, restart your terminal or run:${NC}"
-echo -e "${GREEN}source ~/.zshrc${NC}"
