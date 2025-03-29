@@ -28,10 +28,22 @@ setup(
     include_package_data=True,
     install_requires=[
         'click',
+        'requests',
+        'psutil',
+        'yt-dlp',
+        'keyring',
+        'pytube',
+        'fastapi',
+        'pydantic',
+        'uvicorn',
+        'rich',
+        'pyttsx3',
+        'PyPDF2',
+        'opencv-python'
     ],
     entry_points={
         'console_scripts': [
-            'zap-cli=zap_cli:cli',
+            'zap-cli=zap_cli:cli',  # Make sure this points to the correct CLI entry in your code.
         ],
     },
     classifiers=[

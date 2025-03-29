@@ -16,3 +16,4 @@ rich
 PyPDF2
 pyttsx3
 psutil
+opencv-python
