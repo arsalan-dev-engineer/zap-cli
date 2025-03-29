@@ -88,6 +88,15 @@ pip install --upgrade pip
 echo -e "${YELLOW}Installing packages from $REQUIREMENTS_FILE...${NC}"
 pip install -r "$REQUIREMENTS_FILE"
 
+# Check if setup.py exists and install the package
+SETUP_PY_PATH="${ROOT_DIR}/setup.py"
+if [ -f "$SETUP_PY_PATH" ]; then
+    echo -e "${YELLOW}Found setup.py. Installing the package...${NC}"
+    pip install -e "$ROOT_DIR"
+else
+    echo -e "${YELLOW}No setup.py found. Skipping installation from setup.py.${NC}"
+fi
+
 # Create a symlink for the zap-cli command globally
 ZAP_CLI_PATH="${ROOT_DIR}/zap_cli.py"
 
