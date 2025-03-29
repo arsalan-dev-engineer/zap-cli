@@ -39,7 +39,8 @@ setup(
         'rich',
         'pyttsx3',
         'PyPDF2',
-        'opencv-python'
+        'opencv-python',
+        'setuptools'
     ],
     entry_points={
         'console_scripts': [
