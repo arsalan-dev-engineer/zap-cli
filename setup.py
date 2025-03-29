@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 """
-setup.py fo dev-cli
+setup.py for zap-cli
 
 This script is used to package and distribute the zap-cli project.
 It includes details like the package name, version, dependencies, 
@@ -40,4 +40,6 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.6',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
 )
