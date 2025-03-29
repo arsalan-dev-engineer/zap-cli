@@ -1,4 +1,3 @@
-from setuptools import setup, find_packages
 
 """
 setup.py for zap-cli
@@ -20,6 +19,8 @@ This file should be included in version control (e.g., Git) since it is essentia
 package installation and distribution, but the generated `*.egg-info/` directories 
 should be excluded from version control.
 """
+
+from setuptools import setup, find_packages
 
 setup(
     name='zap-cli',
@@ -44,7 +45,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'zap-cli=zap_cli:cli',  # Make sure this points to the correct CLI entry in your code.
+            'zap-cli = zap_cli.cli:cli',  # <package>.<file>:<function>
         ],
     },
     classifiers=[
@@ -56,3 +57,4 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
 )
+
