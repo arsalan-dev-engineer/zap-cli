@@ -28,3 +28,4 @@ pyttsx3
 psutil
 opencv-python
 setuptools
+boto3

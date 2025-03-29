@@ -1,18 +1,31 @@
 #!/usr/bin/env python3
 
-# import click library
+# import libraries
 import click
+import sys
+import os
+from pathlib import Path
 
-# import modules from commands directory
-from commands import calculator
-from commands import note_app
-from commands import yt_dl
-from commands import gen_pass
-from commands import unit
-from commands import expense
-from commands import sysinfo
-from commands import cache
-from commands import image_processor
+
+currentdir = Path(__file__).resolve().parent
+parentdir = currentdir.parent
+sys.path.insert(0, str(parentdir))
+
+# import modules from commands.personal directory
+from commands.personal import calculator
+from commands.personal import note_app
+from commands.personal import yt_dl
+from commands.personal import gen_pass
+from commands.personal import unit
+from commands.personal import expense
+from commands.personal import sysinfo
+from commands.personal import cache
+from commands.personal import image_processor
+
+# import modules from devops
+from commands.devops import *
+
+
 
 # define main command group for the CLI Tool
 @click.group(help="ZAP CLI tool:A command-line interface for various utilities.")

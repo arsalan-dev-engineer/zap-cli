@@ -31,6 +31,7 @@ def info(message: str):
     """Provide general information or updates about processes."""
     console.print(message, style="bold blue")
 
+
 def debug(message: str):
     """Log debug information for troubleshooting purposes."""
     console.print(message, style="bold white")
