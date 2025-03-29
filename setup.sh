@@ -1,46 +1,50 @@
 #!/bin/bash
 
-# Python virtual environment setup script for zap-cli
+# Exit on any error
 set -e
 
-# Colors
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-NC='\033[0m'
+# Define the project directory
+PROJECT_DIR="$(pwd)"
 
-# Directories
-SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-ROOT_DIR="$(realpath "$SCRIPT_DIR/..")"
-VENV_DIR="${ROOT_DIR}/venv"
-
-echo -e "${YELLOW}Creating virtual environment at ${VENV_DIR}...${NC}"
-python3 -m venv "$VENV_DIR"
-
-# Activate venv
-source "$VENV_DIR/bin/activate"
-
-# Upgrade pip
-echo -e "${YELLOW}Upgrading pip...${NC}"
-pip install --upgrade pip
-
-# Install dependencies
-if [ -f "${ROOT_DIR}/setup.py" ]; then
-    echo -e "${YELLOW}Installing zap-cli in editable mode...${NC}"
-    pip install -e "$ROOT_DIR"
-elif [ -f "${ROOT_DIR}/requirements.txt" ]; then
-    echo -e "${YELLOW}Installing dependencies from requirements.txt...${NC}"
-    pip install -r "${ROOT_DIR}/requirements.txt"
-else
-    echo -e "${RED}No setup.py or requirements.txt found. Exiting...${NC}"
-    deactivate
+# 1. Check if Python and venv are installed
+echo "Checking Python and venv installation..."
+if ! command -v python3 &> /dev/null
+then
+    echo "Python3 is not installed. Please install Python 3."
     exit 1
 fi
 
-# Deactivate
+if ! command -v python3 -m venv &> /dev/null
+then
+    echo "venv module is not available. Installing..."
+    python3 -m pip install --user virtualenv
+fi
+
+# 2. Create a virtual environment
+echo "Creating virtual environment..."
+python3 -m venv venv
+
+# 3. Activate the virtual environment
+source venv/bin/activate
+
+# 4. Install the packages from requirements.txt or setup.py
+echo "Installing dependencies..."
+if [[ -f "$PROJECT_DIR/requirements.txt" ]]; then
+    pip install -r "$PROJECT_DIR/requirements.txt"
+else
+    echo "requirements.txt not found. Installing from setup.py..."
+    pip install .
+fi
+
+# 5. Install zap-cli globally (editable mode)
+echo "Installing zap-cli globally in editable mode..."
+pip install -e .
+
+# 6. Check if the installation was successful by running zap-cli
+echo "Checking zap-cli installation..."
+zap-cli --version
+
+# 7. Deactivate the virtual environment
 deactivate
 
-echo -e "${GREEN}✅ Setup complete.${NC}"
-echo -e "${GREEN}To use zap-cli globally, make sure ~/.local/bin is in your PATH.${NC}"
-echo -e "${GREEN}You can now run:${NC}"
-echo -e "${GREEN}zap-cli --help${NC}"
+echo "Setup complete! You can now use zap-cli globally."
