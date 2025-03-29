@@ -25,7 +25,7 @@ from commands.personal import cache
 from commands.personal import image_processor
 
 # import modules from devops
-from commands.devops import *
+from commands.devops import ec2_cleaner
 
 # define main command group for the CLI Tool
 @click.group(help="ZAP CLI tool:A command-line interface for various utilities.")
@@ -35,25 +35,34 @@ def cli():
      # is REQUIRED for defining the command group
     pass
 
-"""
-Adds command groups to the `cli` group. 
-Each command group is a separate subcommand namespace.
-The first part is the module and the second part specifies the command to be added.
-"""
+
+# add devops command group
+@click.group(help="DevOps related commands.")
+def devops():
+    pass
+
+# add personal command group
+@click.group(help="Personal related commands.")
+def personal():
+    pass
 
 # ========== ADD DEVOPS GROUP TO CLI
-# CODE HERE
+devops.add_command(ec2_cleaner.ec2_cleaner)
 
 # ========== ADD PERSONAL GROUP TO CLI
-cli.add_command(calculator.calculator)
-cli.add_command(note_app.note_app)
-cli.add_command(yt_dl.yt_dl)
-cli.add_command(gen_pass.gen_pass)
-cli.add_command(unit.unit)
-cli.add_command(expense.expense)
-cli.add_command(sysinfo.sysinfo)
-cli.add_command(cache.cache)
-cli.add_command(image_processor.image_processor)
+personal.add_command(calculator.calculator)
+personal.add_command(note_app.note_app)
+personal.add_command(yt_dl.yt_dl)
+personal.add_command(gen_pass.gen_pass)
+personal.add_command(unit.unit)
+personal.add_command(expense.expense)
+personal.add_command(sysinfo.sysinfo)
+personal.add_command(cache.cache)
+personal.add_command(image_processor.image_processor)
+
+# Add 'devops' and 'personal' as subcommands to the main 'cli' group
+cli.add_command(devops)
+cli.add_command(personal)
 
 # Entry point of the script.
 # Calls the CLI tool if the script is executed.

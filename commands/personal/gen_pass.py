@@ -1,7 +1,17 @@
 import click
 import secrets
 import string
-from commands import logger
+import sys
+from pathlib import Path
+
+# Get current script directory
+currentdir = Path(__file__).resolve().parent
+# Get parent directory
+parentdir = currentdir.parent
+# Add parent directory to sys.path
+sys.path.insert(0, str(parentdir))
+
+import logger
 
 # ====================
 
