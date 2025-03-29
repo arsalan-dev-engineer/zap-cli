@@ -1,4 +1,4 @@
-## ZAP CLI
+# ZAP CLI
 
 Welcome to **Zap CLI**! This command-line interface (CLI) tool is designed to provide a wide range of useful scripts and commands for various tasks. This repository features a collection of tools and utilities, all accessible through an intuitive and extensible CLI interface, making it easy to integrate into your daily workflows.
 
@@ -14,7 +14,7 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 - **YouTube Downloader**: Download your favorite videos from YouTube with simple commands.
 
 
-# zap-cli Installation Guide
+## zap-cli Installation Guide
 To get started with `zap-cli`, follow these steps:
 
 ### 1. Clone the Repository
