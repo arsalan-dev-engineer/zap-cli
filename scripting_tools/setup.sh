@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Enhanced Python virtual environment setup script without Zsh installation and setup
+# Enhanced Python virtual environment setup script with global zap-cli and global package installation
 set -e
 
 # Colors for output
@@ -56,7 +56,7 @@ echo -e "${YELLOW}Activating the virtual environment...${NC}"
 source "$VENV_DIR/bin/activate"
 
 # Upgrade pip and install dependencies from requirements.txt
-echo -e "${YELLOW}Upgrading pip and installing packages...${NC}"
+echo -e "${YELLOW}Upgrading pip and installing packages in the virtual environment...${NC}"
 pip install --upgrade pip
 pip install -r "$REQUIREMENTS_FILE"
 
@@ -69,6 +69,10 @@ else
     deactivate
     exit 1
 fi
+
+# Install pip packages globally (if any additional packages need to be globally installed)
+echo -e "${YELLOW}Installing global pip packages...${NC}"
+sudo pip install -r "$REQUIREMENTS_FILE"  # Install globally
 
 # Final messages
 echo -e "${GREEN}Setup complete. Virtual environment is ready to use.${NC}"
