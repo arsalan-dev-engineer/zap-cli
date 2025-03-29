@@ -1,7 +1,17 @@
-
-# This file lists all the dependencies required for the project.
-# Option1: Run: 'pip install -r requirements.txt' to install all dependencies mentioned in this file.
-# Option2 cd into 'scripting-tools' dir then run: './setup.sh' to install all dependencies.
+# ------------------------------------------------------------------------
+# This is the requirements.txt file for the zap-cli project.
+# It lists all the Python dependencies required to run the zap-cli command-line tool.
+# There are two ways to install these dependencies:
+# 
+# Option 1: Run the following command to install all dependencies from this file:
+#   pip install -r requirements.txt
+#
+# Option 2: Navigate to the 'scripting-tools' directory and run the setup.sh script:
+#   cd scripting-tools
+#   ./setup.sh
+#
+# The dependencies listed in this file are:
+# ------------------------------------------------------------------------
 
 click
 pytube
