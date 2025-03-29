@@ -13,7 +13,8 @@ Whether you need to perform calculations, manage expenses, generate secure passw
 - **Unit Conversion**: Convert between various units of measurement seamlessly.
 - **YouTube Downloader**: Download your favorite videos from YouTube with simple commands.
 
-## zap-cli Installation Guide
+
+# zap-cli Installation Guide
 To get started with `zap-cli`, follow these steps:
 
 ### 1. Clone the Repository
@@ -28,24 +29,32 @@ cd zap-cli
 ```
 
 ### 3. Make the Setup Script Executable
-Before running the setup script, make sure it's executable:
 ```bash
 chmod +x scripting_tools/setup.sh
 ```
 
 ### 4. Run the Setup Script
-Run the setup script to automatically configure the environment:
 ```bash
 bash scripting_tools/setup.sh
 ```
 
 ### The script will:
-* Install the required dependencies (Python, Zsh, virtual environment tools).
+* Install the required dependencies (Python, virtual environment tools).
 * Create and activate a Python virtual environment.
 * Install the dependencies listed in requirements.txt.
 * Set up zap-cli.py as a global command.
-* Set Zsh as the default shell and configure it for the virtual environment.
 
-### Note:
-* Make sure bash is installed on your system to run the script.
-* The script will automatically create a virtual environment in the project folder and install all dependencies listed in requirements.txt.
+### 5. After Installation
+Once the script has completed, you can use zap-cli anywhere on your Ubuntu terminal.
+To verify that zap-cli is working, simply type:
+```bash
+zap-cli --help
+```
+
+### Notes:
+* Ensure that bash is installed on your system to run the setup script.
+* The setup script will create a virtual environment in the project folder and install all dependencies listed in requirements.txt.
+
+
+
+
