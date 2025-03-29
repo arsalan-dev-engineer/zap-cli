@@ -94,7 +94,7 @@ ZAP_CLI_PATH="${ROOT_DIR}/zap_cli.py"
 # Check if zap-cli.py exists before creating the symlink
 if [ -f "$ZAP_CLI_PATH" ]; then
     echo -e "${YELLOW}Creating global symlink for zap-cli...${NC}"
-    sudo ln -sf "$VENV_DIR/bin/python $ZAP_CLI_PATH" /usr/local/bin/zap-cli
+    sudo ln -sf "$ZAP_CLI_PATH" /usr/local/bin/zap-cli
 else
     echo -e "${RED}Error: zap-cli.py not found in $ROOT_DIR/${NC}"
     deactivate
